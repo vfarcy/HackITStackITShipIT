@@ -21,7 +21,7 @@ Nous allons construire une application distribuée basée sur une architecture m
 
 L'interface utilisateur sera une **Application Web Monopage (Single Page Application - SPA)**. Ce choix architectural est crucial pour offrir une expérience de jeu fluide et réactive, digne d'une application de bureau. Au lieu de recharger des pages entières, la SPA mettra à jour dynamiquement les composants de l'interface (le plateau, l'inventaire, la ferme du joueur) en temps réel. Elle communiquera avec le backend via deux canaux distincts : des appels **API REST** pour envoyer les actions du joueur (ex: "placer un fermier") et une connexion **WebSocket** pour recevoir instantanément les mises à jour de l'état du jeu, garantissant que tous les joueurs voient la même information au même moment.
 
-### 1.2. Schéma d'Architecture Détaillé
+### 1.1. Schéma d'Architecture Détaillé
 
 Le schéma ci-dessous illustre le flux de communication entre les différents composants de notre application, du navigateur de l'utilisateur jusqu'aux services de backend et aux systèmes de stockage.
 
@@ -77,7 +77,7 @@ Le schéma ci-dessous illustre le flux de communication entre les différents co
 ```
 
 
-### 1.1. Le Rôle Indispensable de Docker
+### 1.2. Le Rôle Indispensable de Docker
 
 Dans un projet de cette envergure, avec 11 microservices développés par 74 personnes, **Docker n'est pas une simple commodité, c'est le pilier qui garantit la cohésion et le succès du projet.** Son utilisation est indispensable pour les raisons suivantes :
 
@@ -90,6 +90,96 @@ Dans un projet de cette envergure, avec 11 microservices développés par 74 per
 *   **Fiabilité de l'Intégration et de la Démo Finale :** Le fichier `docker-compose.yml` est notre "contrat d'orchestration". Il définit comment les 11 services, le frontend, RabbitMQ et Redis démarrent et communiquent entre eux. Pour la démo finale, lancer l'application entière se fera via une seule commande : `docker-compose up`. C'est la garantie d'une présentation fiable, reproductible et professionnelle, prouvant que nous avons livré un système intégré et non un assemblage fragile.
 
 En résumé, Docker abstrait la complexité de l'infrastructure, permettant à toutes les équipes de collaborer efficacement pour construire un produit unifié, comme le feraient des équipes dans une entreprise technologique moderne.
+
+### 1.3. ddddd
+
+La création d'un squelette pour le fichier `docker-compose.yml` est même l'une des toutes premières tâches du hackathon.
+
+C'est de la responsabilité de l'Équipe 1 (Les Architectes) de le définir dès le Jour 1. Ce fichier de base est essentiel pour que toutes les autres équipes puissent démarrer leur développement dans un environnement cohérent.
+
+Le squelette initial doit contenir les services d'infrastructure fondamentaux sur lesquels tout le monde s'appuiera :
+
+- Le service de découverte Eureka
+- La passerelle API Gateway
+- Le broker de messages RabbitMQ
+- Le cache Redis
+
+Pour aider l'Équipe 1 à démarrer (et pour que tout le monde ait une vision claire), voici à quoi pourrait ressembler un excellent squelette de `docker-compose.yml` pour le Jour 1. Ce fichier pourrait être placé à la racine du projet.
+
+
+ # Version de la syntaxe Docker Compose
+ version: '3.8'
+ 
+ # Définition des services (conteneurs)
+ services:
+ 
+   # Service Discovery : L'annuaire de tous nos microservices
+   eureka-server:
+     # 'build' indique à Docker de construire l'image à partir du Dockerfile
+     # situé dans le dossier ./eureka-server
+     build: ./eureka-server
+     # Nom de l'image qui sera construite (optionnel mais bonne pratique)
+     image: hackit-shipit/eureka-server:0.0.1-SNAPSHOT
+     ports:
+       # Mappe le port 8761 du conteneur au port 8761 de la machine hôte
+       - "8761:8761"
+     environment:
+       # Active le profil Spring 'docker' pour des configurations spécifiques au conteneur
+       - SPRING_PROFILES_ACTIVE=docker
+     networks:
+       - agricola-net
+ 
+   # API Gateway : Le point d'entrée unique pour le frontend
+   api-gateway:
+     build: ./api-gateway
+     image: hackit-shipit/api-gateway:0.0.1-SNAPSHOT
+     ports:
+       # Le port standard pour les requêtes HTTP de l'application
+       - "8080:8080"
+     environment:
+       - SPRING_PROFILES_ACTIVE=docker
+       # Indique à la Gateway où trouver Eureka pour le routage dynamique
+       - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka
+     # 'depends_on' s'assure qu'Eureka est démarré avant la Gateway
+     depends_on:
+       - eureka-server
+     networks:
+       - agricola-net
+ 
+   # Messagerie Asynchrone : Pour la communication par événements
+   rabbitmq:
+     # Utilise une image officielle depuis Docker Hub
+     image: rabbitmq:3.13-management
+     ports:
+       # 5672 est le port pour le protocole AMQP (utilisé par Spring)
+       - "5672:5672"
+       # 15672 est pour l'interface de management web (très utile pour le debug)
+       - "15672:15672"
+     environment:
+       # Identifiants par défaut (à ne pas utiliser en production, mais parfait pour le dev)
+       - RABBITMQ_DEFAULT_USER=guest
+       - RABBITMQ_DEFAULT_PASS=guest
+     networks:
+       - agricola-net
+ 
+   # Cache / Base de données en mémoire : Pour stocker l'état du jeu
+   redis:
+     image: redis:7.2-alpine
+     ports:
+       # 6379 est le port par défaut de Redis
+       - "6379:6379"
+     networks:
+       - agricola-net
+ 
+ # Définition du réseau partagé
+ # Permet aux conteneurs de communiquer entre eux en utilisant leur nom de service
+ # (ex: la Gateway peut joindre Eureka via l'URL http://eureka-server:8761)
+ networks:
+   agricola-net:
+     driver: bridge
+ 
+ 
+
 
 ## 2. Organisation
 
