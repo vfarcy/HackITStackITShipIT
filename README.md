@@ -135,9 +135,7 @@ Pour que 11 équipes convergent vers un produit unique et fonctionnel, le respec
     *   **À NE PAS FAIRE :** Développer pendant 4 jours en local avec votre IDE et vous dire "on verra pour Docker plus tard".
     *   **POURQUOI ?** La démo finale se fera avec `docker-compose up`. Si votre service ne fonctionne que sur votre machine, il ne fonctionne pas pour le projet. Docker est la garantie de la reproductibilité et le filet de sécurité de notre démo.
 
-
-
-## 3. Organisation Interne des Équipes
+### 2.3. Organisation Interne des Équipes
 
 Chaque équipe s'organisera en "Squad Agile" avec les rôles suivants pour maximiser l'efficacité :
 
@@ -147,7 +145,7 @@ Chaque équipe s'organisera en "Squad Agile" avec les rôles suivants pour maxim
 *   **Squad Frontend (2-3) :** (Pour les équipes du pôle Interface) Développe les composants visuels et les interactions.
 *   **DevOps / Ingénieur Qualité (1) :** Responsable du `Dockerfile` du service et de son intégration dans le `docker-compose` global.
 
-## 4. Organisation & Communication du Hackathon
+## 3. Organisation & Communication du Hackathon
 
 Pour assurer une collaboration fluide entre 74 personnes, nous suivrons des rituels agiles :
 
@@ -155,7 +153,7 @@ Pour assurer une collaboration fluide entre 74 personnes, nous suivrons des ritu
 *   **Contrats d'API :** La communication entre les services se base sur des contrats formels définis avec **OpenAPI (Swagger)**. L'équipe "Architectes" est la gardienne de la documentation d'API centrale. Aucune intégration ne doit commencer sans un contrat validé.
 *   **Outils :** La communication se fera sur une plateforme de chat (Slack/Teams) avec des canaux dédiés (`#api-contracts`, `#frontend-backend-sync`, `#deployment-docker`, etc.).
 
-## 5. Backlog Quotidien (Objectifs Généraux)
+## 4. Backlog Quotidien (Objectifs Généraux)
  
 Voici une feuille de route détaillée pour guider le travail de chaque équipe jour après jour.
 
@@ -208,7 +206,7 @@ Voici une feuille de route détaillée pour guider le travail de chaque équipe 
     *   Préparation des slides de présentation.
     *   **DÉMOS !**
 
-## 6. Ressources Techniques (Backend)
+## 5. Ressources Techniques (Backend)
 
 Chaque service backend partagera une base commune et ajoutera des dépendances spécifiques.
 
@@ -224,7 +222,7 @@ Chaque service backend partagera une base commune et ajoutera des dépendances s
 | **Documentation API** | `org.springdoc:springdoc-openapi-starter-webmvc-ui` | Tous les services backend |
 | **Utilitaires** | `org.projectlombok:lombok`, `spring-boot-devtools` | Tous les services |
 
-## 7. Ressources Humaines (Encadrement)
+## 6. Ressources Humaines (Encadrement du hackathon )
 
 Une équipe de mentors sera présente pour vous guider :
 
@@ -233,7 +231,7 @@ Une équipe de mentors sera présente pour vous guider :
 *   **Mentors Spécialisés (3-4) :** Experts en Backend, Frontend, et DevOps/Infra pour vous aider au quotidien.
 *   **Game Master (1) :** L'expert fonctionnel des règles d'Agricola.
 
-## 8. Évaluation
+## 7. Évaluation
 
 L'évaluation portera sur le processus autant que sur le résultat final.
 
@@ -248,7 +246,7 @@ L'évaluation portera sur le processus autant que sur le résultat final.
     *   **Évaluation par les Pairs (30%) :** Chaque étudiant évaluera anonymement la contribution des membres de son équipe (technique, collaboration, fiabilité).
     *   **Évaluation par les Mentors (30%) :** Les encadrants évalueront la performance individuelle observée durant le hackathon (apprentissage, curiosité, esprit d'équipe).
 
-## 9. Stratégie de Test et Qualité
+## 8. Stratégie de Test et Qualité
 
 La qualité est l'affaire de tous. Pour livrer un produit fonctionnel, chaque équipe doit s'assurer que son domaine est robuste et bien testé. Voici les types de tests à réaliser :
 
@@ -293,25 +291,11 @@ Ces tests simulent un parcours utilisateur complet à travers toute l'applicatio
 
 Bonne chance à toutes et à tous, et que la meilleure ferme gagne !
 
-## 10. Motivation : L'Énergie du Hackathon
+## 9. Motivation : L'Énergie du Hackathon
 
 Un projet de cette intensité est un marathon, pas un sprint. Maintenir un haut niveau d'énergie et de motivation est aussi crucial que la qualité du code. Voici comment nous allons transformer ce défi en une expérience stimulante et positive.
 
-### Créer l'Élan (Avant et au Début)
-
-*   **Une Vision Professionnelle :** Vous n'êtes pas juste des étudiants qui codent un jeu. Pendant 5 jours, vous êtes les 74 ingénieurs d'une startup qui doit livrer un produit complexe à un client. Ce projet sur votre CV est un véritable atout qui démontre des compétences techniques et humaines rares (collaboration à grande échelle, résilience, architecture distribuée).
-*   **Démystifier la Complexité :** L'architecture peut sembler intimidante, mais le **Backlog Quotidien** est votre guide. Concentrez-vous uniquement sur les objectifs du jour. Lundi, l'objectif n'est pas de finir le jeu, mais de poser les fondations. Chaque jour est une victoire atteignable.
-*   **Valoriser Chaque Rôle :** Chaque rôle, du "Product Owner" au "DevOps/Ingénieur Qualité", est essentiel. L'appropriation (`ownership`) de votre domaine est la clé. Le succès de votre équipe dépend de la contribution de chacun, et le succès du projet dépend de la collaboration de toutes les équipes.
-
-### Maintenir l'Énergie (Pendant)
-
-*   **Célébrer les Victoires :** Un canal de chat **`#succes`** sera créé. Utilisez-le pour célébrer publiquement chaque avancée, même les plus petites : "L'API Gateway route vers le User Service !", "Notre composant React affiche les données mockées !", "On a réussi à faire communiquer le service X et Y !". Voir la progression collective est un puissant moteur.
-*   **Transformer les Blocages en Entraide :** Un blocage n'est pas un échec, c'est une opportunité de collaborer. N'hésitez jamais à demander de l'aide sur les canaux dédiés. Aider une autre équipe est tout aussi valorisé que faire avancer son propre service.
-*   **Gérer l'Humain :** Des développeurs fatigués ne sont pas efficaces. Des pauses régulières seront encouragées. Du café et des snacks seront disponibles pour garder les batteries chargées. L'ambiance doit rester positive et collaborative.
-
-Ce hackathon est une simulation intense mais bienveillante. L'objectif est d'apprendre, de collaborer et de produire collectivement quelque chose dont vous serez tous fiers.
-
-## 11. Discours de Lancement (Kick-off)
+### Discours de Lancement (Kick-off)
 
 > Bonjour à tous et bienvenue au hackathon "Agricola Numerica" !
 >
@@ -328,3 +312,18 @@ Ce hackathon est une simulation intense mais bienveillante. L'objectif est d'app
 > Alors, êtes-vous prêts à construire quelque chose dont vous serez fiers ? Êtes-vous prêts à relever le défi ?
 >
 > Parfait. Que le hackathon "Agricola Numerica" commence !
+
+### Créer l'Élan (Avant et au Début)
+
+*   **Une Vision Professionnelle :** Vous n'êtes pas juste des étudiants qui codent un jeu. Pendant 5 jours, vous êtes les 74 ingénieurs d'une startup qui doit livrer un produit complexe à un client. Ce projet sur votre CV est un véritable atout qui démontre des compétences techniques et humaines rares (collaboration à grande échelle, résilience, architecture distribuée).
+*   **Démystifier la Complexité :** L'architecture peut sembler intimidante, mais le **Backlog Quotidien** est votre guide. Concentrez-vous uniquement sur les objectifs du jour. Lundi, l'objectif n'est pas de finir le jeu, mais de poser les fondations. Chaque jour est une victoire atteignable.
+*   **Valoriser Chaque Rôle :** Chaque rôle, du "Product Owner" au "DevOps/Ingénieur Qualité", est essentiel. L'appropriation (`ownership`) de votre domaine est la clé. Le succès de votre équipe dépend de la contribution de chacun, et le succès du projet dépend de la collaboration de toutes les équipes.
+
+### Maintenir l'Énergie (Pendant)
+
+*   **Célébrer les Victoires :** Un canal de chat **`#succes`** sera créé. Utilisez-le pour célébrer publiquement chaque avancée, même les plus petites : "L'API Gateway route vers le User Service !", "Notre composant React affiche les données mockées !", "On a réussi à faire communiquer le service X et Y !". Voir la progression collective est un puissant moteur.
+*   **Transformer les Blocages en Entraide :** Un blocage n'est pas un échec, c'est une opportunité de collaborer. N'hésitez jamais à demander de l'aide sur les canaux dédiés. Aider une autre équipe est tout aussi valorisé que faire avancer son propre service.
+*   **Gérer l'Humain :** Des développeurs fatigués ne sont pas efficaces. Des pauses régulières seront encouragées. Du café et des snacks seront disponibles pour garder les batteries chargées. L'ambiance doit rester positive et collaborative.
+
+Ce hackathon est une simulation intense mais bienveillante. L'objectif est d'apprendre, de collaborer et de produire collectivement quelque chose dont vous serez tous fiers.
+
