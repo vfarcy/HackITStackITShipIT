@@ -57,12 +57,57 @@ Pour assurer une collaboration fluide entre 74 personnes, nous suivrons des ritu
 *   **Outils :** La communication se fera sur une plateforme de chat (Slack/Teams) avec des canaux dédiés (`#api-contracts`, `#frontend-backend-sync`, `#deployment-docker`, etc.).
 
 ## 5. Backlog Quotidien (Objectifs Généraux)
+ 
+Voici une feuille de route détaillée pour guider le travail de chaque équipe jour après jour.
 
-*   **Jour 1 (Lundi) : Fondations & Contrats.** Mise en place de l'infrastructure de base (`docker-compose`, services vides), modélisation des données et définition des contrats d'API.
-*   **Jour 2 (Mardi) : Le "Hello World" de Bout en Bout.** Un utilisateur doit pouvoir se créer, créer une partie et la rejoindre. L'architecture de base doit être prouvée fonctionnelle.
-*   **Jour 3 (Mercredi) : La Première Action de Jeu.** Un joueur doit pouvoir effectuer une action simple (ex: "Prendre 3 bois") et la mise à jour doit être visible par tous en temps réel. **Checkpoint à mi-parcours.**
-*   **Jour 4 (Jeudi) : Montée en Puissance.** Implémentation des fonctionnalités complexes (phase de Récolte, construction de clôtures, etc.).
-*   **Jour 5 (Vendredi) : Finalisation & Démos.** Gel des fonctionnalités, chasse aux bugs, préparation et passage des démonstrations finales.
+### Jour 1 (Lundi) : Fondations, Modélisation et Contrats
+**Objectif Global :** Mettre en place l'infrastructure, définir les modèles de données et établir les contrats d'API. Personne ne code une logique métier complexe, on construit les fondations.
+*   **Équipe 1 (Architectes)**: Créer le squelette de l'infrastructure (`Eureka`, `Gateway`, `docker-compose` de base) et définir le processus de documentation OpenAPI.
+*   **Pôle Logique de Jeu (Équipes 2, 3, 4)**: Modéliser les concepts clés d'Agricola en objets Java (`Game`, `PlayerFarm`, `Animal`, etc.) en collaboration avec l'équipe 5.
+*   **Équipe 5 (Gardiens de l'État)**: Créer le projet `game-state-service`, configurer Redis, et définir la classe principale `GameState` qui sera stockée.
+*   **Pôle Frontend (Équipes 6, 7, 8)**: Mettre en place le projet frontend et créer les maquettes visuelles statiques des différents plateaux et inventaires.
+*   **Équipe 9 (Messagers)**: Créer le projet `notification-service`, ajouter RabbitMQ au `docker-compose`, et définir le format de l'événement `GameStateUpdatedEvent`.
+*   **Équipe 10 (Hôtes)**: Créer le projet `game-lobby-service` et définir ses endpoints REST dans un fichier `openapi.yaml`.
+*   **Équipe 11 (Greffiers)**: Créer le projet `user-service` et définir son endpoint `POST /users` dans un fichier `openapi.yaml`.
+
+### Jour 2 (Mardi) : Le "Hello World" de Bout en Bout
+**Objectif Global :** Intégrer les services de base pour prouver que l'architecture fonctionne. Un joueur doit pouvoir se créer, créer une partie et la rejoindre.
+*   **Équipe 1 (Architectes)**: Intégrer les routes des services `user-service` et `lobby-service` dans la Gateway.
+*   **Équipe 2 (Maîtres du Jeu)**: Commencer à implémenter la logique de la phase de "Préparation" (révéler une carte, réapprovisionner).
+*   **Équipe 5 (Gardiens de l'État)**: Implémenter les méthodes `save(GameState)` et `findById(gameId)` du service.
+*   **Pôle Frontend (Équipes 6, 7, 8)**: Rendre les vues dynamiques en les connectant à l'API Gateway pour créer un joueur et afficher la liste des parties.
+*   **Équipe 9 (Messagers)**: Mettre en place un "ping-pong" WebSocket pour tester la connexion temps réel avec le frontend.
+*   **Équipe 10 (Hôtes)**: Implémenter la logique des endpoints du lobby définis la veille.
+*   **Équipe 11 (Greffiers)**: Implémenter la logique de l'endpoint `POST /users`.
+
+### Jour 3 (Mercredi) : La Première Action de Jeu
+**Objectif Global :** Un joueur doit pouvoir effectuer une action simple (ex: "Prendre 3 bois") et la mise à jour doit être visible par tous les joueurs de la partie en temps réel.
+*   **Équipe 1 (Architectes)**: Intégrer les routes du `game-engine-service` et stabiliser l'infrastructure.
+*   **Équipe 2 (Maîtres du Jeu)**: Implémenter le endpoint `POST /games/{id}/action`, valider une action simple, mettre à jour l'état, et publier l'événement `GameStateUpdatedEvent` sur RabbitMQ.
+*   **Équipe 5 (Gardiens de l'État)**: S'assurer que la sauvegarde/lecture de l'état après une action fonctionne parfaitement.
+*   **Pôle Frontend (Équipes 6, 7, 8)**: Rendre les cases actions cliquables, envoyer la requête d'action, et gérer la réception du message WebSocket pour rafraîchir TOUTE l'interface.
+*   **Équipe 9 (Messagers)**: Implémenter la logique complète : écouter RabbitMQ, recevoir l'événement, et le pousser via WebSocket aux bons clients.
+*   **Équipes 3, 4, 10, 11**: Support, débugging et préparation des tâches du lendemain.
+
+### Jour 4 (Jeudi) : Montée en Puissance des Fonctionnalités
+**Objectif Global :** Implémenter les logiques de jeu les plus complexes et les afficher.
+*   **Équipe 2 (Maîtres du Jeu)**: Gérer la séquence des tours de joueurs et le placement des fermiers.
+*   **Équipe 3 (Bâtisseurs)**: Implémenter la logique des actions "Construire des pièces" et "Construire des clôtures".
+*   **Équipe 4 (Fermiers)**: Implémenter la logique de la phase de **Récolte** (nourrir, reproduire). C'est le gros morceau de la journée.
+*   **Pôle Frontend (Équipes 6, 7, 8)**: Afficher dynamiquement les nouvelles fonctionnalités (ferme qui grandit, indicateur de récolte, etc.).
+*   **Toutes les autres équipes**: Débugging, stabilisation, et amélioration de l'existant.
+
+### Jour 5 (Vendredi) : Finalisation, Débugging et Préparation de la Démo
+**Objectif Global :** Geler les nouvelles fonctionnalités ("feature freeze"), chasser les bugs, et préparer une présentation fluide.
+*   **Matin (Toutes les équipes)**:
+    *   Correction intensive des bugs.
+    *   Amélioration de l'UX/UI (retours visuels, messages d'erreur clairs).
+    *   S'assurer que le projet se lance avec un simple `docker-compose up`.
+    *   Finaliser le `README.md` de chaque service.
+*   **Après-midi (Toutes les équipes)**:
+    *   Répétition de la démo.
+    *   Préparation des slides de présentation.
+    *   **DÉMOS !**
 
 ## 6. Ressources Techniques (Backend)
 
