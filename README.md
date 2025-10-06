@@ -142,6 +142,10 @@ L'évaluation portera sur le processus autant que sur le résultat final.
 2.  **Checkpoint (Mercredi) :** Une mini-démo par pôle pour vérifier l'état de l'intégration.
 3.  **Évaluation Finale (Vendredi) :** La note sera une pondération de :
     *   **Démo Finale (40%) :** Le produit final sera jugé sur sa complétude, sa robustesse et la qualité de la présentation.
+        *   **Nature de la démo :** Il s'agit d'une **démonstration globale et unifiée de l'application complète**, et non d'une série de démos par équipe. L'objectif est de prouver que les 11 microservices s'intègrent et fonctionnent ensemble pour créer une expérience utilisateur cohérente.
+        *   **Format :** La présentation doit raconter l'histoire d'une session de jeu fluide, du début à la fin (création de partie, tours de jeu, actions complexes, phase de récolte).
+        *   **Critères :** La note portera sur la **fluidité** du scénario présenté, la **robustesse** de l'application (absence de bugs majeurs), la **complétude** des fonctionnalités et la **clarté** des explications techniques sur le flux de données (API Gateway -> Service -> RabbitMQ -> WebSocket -> Frontend).
+        *   **Responsabilité :** Le succès de cette démo est une **responsabilité collective**. Un échec d'intégration impacte l'ensemble du projet, ce qui reflète la réalité des projets logiciels à grande échelle.
     *   **Évaluation par les Pairs (30%) :** Chaque étudiant évaluera anonymement la contribution des membres de son équipe (technique, collaboration, fiabilité).
     *   **Évaluation par les Mentors (30%) :** Les encadrants évalueront la performance individuelle observée durant le hackathon (apprentissage, curiosité, esprit d'équipe).
 
