@@ -91,7 +91,7 @@ Dans un projet de cette envergure, avec 11 microservices développés par 74 per
 
 En résumé, Docker abstrait la complexité de l'infrastructure, permettant à toutes les équipes de collaborer efficacement pour construire un produit unifié, comme le feraient des équipes dans une entreprise technologique moderne.
 
-## 2. Répartition des Équipes par Domaine
+## 2. Organisation
 
 ### 2.1. La répartition des équipes par domaines
 
