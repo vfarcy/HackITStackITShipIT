@@ -106,7 +106,7 @@ Le squelette initial doit contenir les services d'infrastructure fondamentaux su
 
 Pour aider l'Équipe 1 à démarrer (et pour que tout le monde ait une vision claire), voici à quoi pourrait ressembler un excellent squelette de `docker-compose.yml` pour le Jour 1. Ce fichier pourrait être placé à la racine du projet.
 
-<code>
+```
  # Version de la syntaxe Docker Compose
  version: '3.8'
  
@@ -178,7 +178,7 @@ Pour aider l'Équipe 1 à démarrer (et pour que tout le monde ait une vision cl
    agricola-net:
      driver: bridge
  
- </code>
+```
 
 
 ## 2. Organisation
