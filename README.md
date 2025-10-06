@@ -17,7 +17,7 @@ Nous allons construire une application distribuée basée sur une architecture m
 *   **Frontend :** Framework JavaScript moderne (React, Vue, ou Angular)
 *   **Conteneurisation :** Docker & Docker Compose
 
-!Diagramme d'architecture
+![Diagramme d'architecture](./docs/images/architecture-diagram.png)
 *(Note : Ce diagramme est une représentation conceptuelle de l'architecture cible)*
 
 ### 1.1. Le Rôle Indispensable de Docker
