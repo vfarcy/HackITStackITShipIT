@@ -235,7 +235,7 @@ Chaque équipe s'organisera en "Squad Agile" avec les rôles suivants pour maxim
 *   **Squad Frontend (2-3) :** (Pour les équipes du pôle Interface) Développe les composants visuels et les interactions.
 *   **DevOps / Ingénieur Qualité (1) :** Responsable du `Dockerfile` du service et de son intégration dans le `docker-compose` global.
 
-## 3. Organisation & Communication du Hackathon
+### 2.4. Organisation & Communication du Hackathon
 
 Pour assurer une collaboration fluide entre 74 personnes, nous suivrons des rituels agiles :
 
@@ -243,7 +243,7 @@ Pour assurer une collaboration fluide entre 74 personnes, nous suivrons des ritu
 *   **Contrats d'API :** La communication entre les services se base sur des contrats formels définis avec **OpenAPI (Swagger)**. L'équipe "Architectes" est la gardienne de la documentation d'API centrale. Aucune intégration ne doit commencer sans un contrat validé.
 *   **Outils :** La communication se fera sur une plateforme de chat (Slack/Teams) avec des canaux dédiés (`#api-contracts`, `#frontend-backend-sync`, `#deployment-docker`, etc.).
 
-## 4. Backlog Quotidien (Objectifs Généraux)
+## 3. Backlog Quotidien (Objectifs Généraux)
  
 Voici une feuille de route détaillée pour guider le travail de chaque équipe jour après jour.
 
@@ -296,7 +296,7 @@ Voici une feuille de route détaillée pour guider le travail de chaque équipe 
     *   Préparation des slides de présentation.
     *   **DÉMOS !**
 
-## 5. Ressources Techniques (Backend)
+## 4. Ressources Techniques (Backend)
 
 Chaque service backend partagera une base commune et ajoutera des dépendances spécifiques.
 
@@ -312,7 +312,7 @@ Chaque service backend partagera une base commune et ajoutera des dépendances s
 | **Documentation API** | `org.springdoc:springdoc-openapi-starter-webmvc-ui` | Tous les services backend |
 | **Utilitaires** | `org.projectlombok:lombok`, `spring-boot-devtools` | Tous les services |
 
-## 6. Ressources Humaines (Encadrement du hackathon )
+## 5. Ressources Humaines (Encadrement du hackathon )
 
 Une équipe de mentors sera présente pour vous guider :
 
@@ -321,7 +321,7 @@ Une équipe de mentors sera présente pour vous guider :
 *   **Mentors Spécialisés (3-4) :** Experts en Backend, Frontend, et DevOps/Infra pour vous aider au quotidien.
 *   **Game Master (1) :** L'expert fonctionnel des règles d'Agricola.
 
-## 7. Évaluation
+## 6. Évaluation
 
 L'évaluation portera sur le processus autant que sur le résultat final.
 
@@ -336,7 +336,7 @@ L'évaluation portera sur le processus autant que sur le résultat final.
     *   **Évaluation par les Pairs (30%) :** Chaque étudiant évaluera anonymement la contribution des membres de son équipe (technique, collaboration, fiabilité).
     *   **Évaluation par les Mentors (30%) :** Les encadrants évalueront la performance individuelle observée durant le hackathon (apprentissage, curiosité, esprit d'équipe).
 
-## 8. Stratégie de Test et Qualité
+## 7. Stratégie de Test et Qualité
 
 La qualité est l'affaire de tous. Pour livrer un produit fonctionnel, chaque équipe doit s'assurer que son domaine est robuste et bien testé. Voici les types de tests à réaliser :
 
@@ -381,7 +381,7 @@ Ces tests simulent un parcours utilisateur complet à travers toute l'applicatio
 
 Bonne chance à toutes et à tous, et que la meilleure ferme gagne !
 
-## 9. Motivation : L'Énergie du Hackathon
+## 8. Motivation : L'Énergie du Hackathon
 
 Un projet de cette intensité est un marathon, pas un sprint. Maintenir un haut niveau d'énergie et de motivation est aussi crucial que la qualité du code. Voici comment nous allons transformer ce défi en une expérience stimulante et positive.
 
