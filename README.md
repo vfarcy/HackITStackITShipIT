@@ -1,4 +1,4 @@
-# Hackathon "Agricola Numerica" - Document de Référence Complet
+# Hackathon "Agricola Numerica" 
 
 Bienvenue au hackathon "Agricola Numerica" ! 
 
@@ -16,6 +16,10 @@ Nous allons construire une application distribuée basée sur une architecture m
 *   **Communication Temps Réel :** WebSockets (via STOMP)
 *   **Frontend :** Framework JavaScript moderne (React, Vue, ou Angular)
 *   **Conteneurisation :** Docker & Docker Compose
+
+### 1.1. Architecture Frontend (Single Page Application)
+
+L'interface utilisateur sera une **Application Web Monopage (Single Page Application - SPA)**. Ce choix architectural est crucial pour offrir une expérience de jeu fluide et réactive, digne d'une application de bureau. Au lieu de recharger des pages entières, la SPA mettra à jour dynamiquement les composants de l'interface (le plateau, l'inventaire, la ferme du joueur) en temps réel. Elle communiquera avec le backend via deux canaux distincts : des appels **API REST** pour envoyer les actions du joueur (ex: "placer un fermier") et une connexion **WebSocket** pour recevoir instantanément les mises à jour de l'état du jeu, garantissant que tous les joueurs voient la même information au même moment.
 
 ### 1.2. Schéma d'Architecture Détaillé
 
