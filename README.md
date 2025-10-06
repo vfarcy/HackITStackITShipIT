@@ -21,7 +21,7 @@ Nous allons construire une application distribuée basée sur une architecture m
 
 L'interface utilisateur sera une **Application Web Monopage (Single Page Application - SPA)**. Ce choix architectural est crucial pour offrir une expérience de jeu fluide et réactive, digne d'une application de bureau. Au lieu de recharger des pages entières, la SPA mettra à jour dynamiquement les composants de l'interface (le plateau, l'inventaire, la ferme du joueur) en temps réel. Elle communiquera avec le backend via deux canaux distincts : des appels **API REST** pour envoyer les actions du joueur (ex: "placer un fermier") et une connexion **WebSocket** pour recevoir instantanément les mises à jour de l'état du jeu, garantissant que tous les joueurs voient la même information au même moment.
 
-### 1.1. Schéma d'Architecture Détaillé
+### 1.2. Schéma d'Architecture Détaillé
 
 Le schéma ci-dessous illustre le flux de communication entre les différents composants de notre application, du navigateur de l'utilisateur jusqu'aux services de backend et aux systèmes de stockage.
 
@@ -77,7 +77,7 @@ Le schéma ci-dessous illustre le flux de communication entre les différents co
 ```
 
 
-### 1.2. Le Rôle Indispensable de Docker
+### 1.3. Le Rôle Indispensable de Docker
 
 Dans un projet de cette envergure, avec 11 microservices développés par 74 personnes, **Docker n'est pas une simple commodité, c'est le pilier qui garantit la cohésion et le succès du projet.** Son utilisation est indispensable pour les raisons suivantes :
 
@@ -91,7 +91,7 @@ Dans un projet de cette envergure, avec 11 microservices développés par 74 per
 
 En résumé, Docker abstrait la complexité de l'infrastructure, permettant à toutes les équipes de collaborer efficacement pour construire un produit unifié, comme le feraient des équipes dans une entreprise technologique moderne.
 
-### 1.3. docke-compose.yml
+### 1.4. docke-compose.yml
 
 La création d'un squelette pour le fichier `docker-compose.yml` est même l'une des toutes premières tâches du hackathon.
 
