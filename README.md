@@ -20,6 +20,20 @@ Nous allons construire une application distribuée basée sur une architecture m
 !Diagramme d'architecture
 *(Note : Ce diagramme est une représentation conceptuelle de l'architecture cible)*
 
+### 1.1. Le Rôle Indispensable de Docker
+
+Dans un projet de cette envergure, avec 11 microservices développés par 74 personnes, **Docker n'est pas une simple commodité, c'est le pilier qui garantit la cohésion et le succès du projet.** Son utilisation est indispensable pour les raisons suivantes :
+
+*   **Standardisation de l'Environnement :** Docker résout le problème classique du "ça marche sur ma machine". En définissant chaque service et ses dépendances dans un `Dockerfile` et en orchestrant l'ensemble avec `docker-compose`, nous nous assurons que chaque développeur, quel que soit son système d'exploitation (Windows, macOS, Linux), exécute **exactement le même environnement**. Cela élimine les bugs liés à la configuration locale et permet de se concentrer sur le code.
+
+*   **Gestion Simplifiée des Dépendances :** Notre architecture repose sur des services tiers comme RabbitMQ et Redis. Les installer et les configurer manuellement sur chaque poste serait une source infinie d'erreurs et de perte de temps. Avec `docker-compose`, l'ajout de ces services se résume à quelques lignes de YAML. Tout le monde dispose des mêmes versions, configurées de la même manière, en lançant une seule commande.
+
+*   **Isolation et Autonomie des Services :** Chaque microservice tourne dans son propre conteneur isolé. Cela garantit que les dépendances d'un service (par exemple, une librairie spécifique) n'entrent pas en conflit avec celles d'un autre. C'est l'incarnation même du principe d'autonomie des microservices.
+
+*   **Fiabilité de l'Intégration et de la Démo Finale :** Le fichier `docker-compose.yml` est notre "contrat d'orchestration". Il définit comment les 11 services, le frontend, RabbitMQ et Redis démarrent et communiquent entre eux. Pour la démo finale, lancer l'application entière se fera via une seule commande : `docker-compose up`. C'est la garantie d'une présentation fiable, reproductible et professionnelle, prouvant que nous avons livré un système intégré et non un assemblage fragile.
+
+En résumé, Docker abstrait la complexité de l'infrastructure, permettant à toutes les équipes de collaborer efficacement pour construire un produit unifié, comme le feraient des équipes dans une entreprise technologique moderne.
+
 ## 2. Répartition des Équipes par Domaine
 
 Le projet est divisé en 11 domaines, chacun sous la responsabilité d'une équipe dédiée. La collaboration et la communication entre ces équipes sont la clé du succès.
