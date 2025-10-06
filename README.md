@@ -111,6 +111,33 @@ Le projet est divisé en 11 domaines, chacun sous la responsabilité d'une équi
 
 ## 3. Organisation Interne des Équipes
 
+### 2.1. Les Commandements du Hackathon : À faire et à ne pas faire
+
+Pour que 11 équipes convergent vers un produit unique et fonctionnel, le respect de quelques principes fondamentaux est non-négociable.
+
+*   **1. VALIDEZ LES CONTRATS AVANT DE CODER**
+    *   **À FAIRE :** Passez du temps avec les équipes dont vous dépendez (ou qui dépendent de vous) pour définir et valider les contrats d'API (OpenAPI) et les formats d'événements (RabbitMQ). Utilisez le canal `#api-contracts`.
+    *   **À NE PAS FAIRE :** Commencer à implémenter la logique métier de votre service en vous basant sur des suppositions sur ce que les autres services vont vous envoyer.
+    *   **POURQUOI ?** Un contrat est une promesse. Coder sans contrat, c'est construire une maison sans plan. Vous serez obligé de tout casser et de tout reconstruire quand vous réaliserez que les portes ne sont pas à la bonne taille pour les murs. C'est la cause n°1 d'échec dans les projets microservices.
+
+*   **2. INTÉGREZ TÔT, INTÉGREZ SOUVENT**
+    *   **À FAIRE :** Dès que deux services ont un contrat validé, essayez de les faire communiquer, même si c'est pour un simple "Hello World". L'objectif du Jour 2 est précisément de valider ce flux de base.
+    *   **À NE PAS FAIRE :** Attendre le Jour 4 ou 5 pour essayer de connecter votre service au reste de l'écosystème. C'est la recette garantie pour une "intégration hell" (l'enfer de l'intégration).
+    *   **POURQUOI ?** Découvrir un problème de réseau, de configuration ou de sérialisation le mardi est un petit obstacle. Le découvrir le vendredi à 14h est une catastrophe.
+
+*   **3. NE RÉINVENTEZ PAS LA ROUE**
+    *   **À FAIRE :** Partagez les configurations communes ! Si une équipe a trouvé la bonne configuration Maven/Gradle pour RabbitMQ ou Eureka, partagez-la sur le canal `#backend-config`. Idem pour les `Dockerfile` ou les configurations de composants frontend.
+    *   **À NE PAS FAIRE :** Chaque équipe passe des heures à résoudre les mêmes problèmes de configuration dans son coin.
+    *   **POURQUOI ?** Vous êtes une seule et grande équipe projet. Le temps gagné par une équipe sur un problème technique est du temps gagné pour l'ensemble du projet.
+
+*   **4. PENSEZ DOCKER DÈS LA PREMIÈRE MINUTE**
+    *   **À FAIRE :** Chaque équipe est responsable de fournir un `Dockerfile` fonctionnel pour son service. Testez régulièrement que votre service démarre correctement avec `docker-compose up`.
+    *   **À NE PAS FAIRE :** Développer pendant 4 jours en local avec votre IDE et vous dire "on verra pour Docker plus tard".
+    *   **POURQUOI ?** La démo finale se fera avec `docker-compose up`. Si votre service ne fonctionne que sur votre machine, il ne fonctionne pas pour le projet. Docker est la garantie de la reproductibilité et le filet de sécurité de notre démo.
+
+
+## 3. Organisation Interne des Équipes
+
 Chaque équipe s'organisera en "Squad Agile" avec les rôles suivants pour maximiser l'efficacité :
 
 *   **Product Owner / Chef de Projet (1) :** Gardien de la vision fonctionnelle, expert des règles, gestion du backlog de l'équipe.
