@@ -93,6 +93,8 @@ En résumé, Docker abstrait la complexité de l'infrastructure, permettant à t
 
 ## 2. Répartition des Équipes par Domaine
 
+### 2.1. La répartition des équipes par domaines
+
 Le projet est divisé en 11 domaines, chacun sous la responsabilité d'une équipe dédiée. La collaboration et la communication entre ces équipes sont la clé du succès.
 
 | Pôle | Équipe | Nom | Domaine(s) | Responsabilités Clés |
@@ -109,9 +111,7 @@ Le projet est divisé en 11 domaines, chacun sous la responsabilité d'une équi
 | | Équipe 10 (7) | Les Hôtes | Game Lobby Service | Création et gestion des salons de jeu avant le début d'une partie. |
 | | Équipe 11 (6) | Les Greffiers | User Service | Gestion simplifiée des profils de joueurs. |
 
-## 3. Organisation Interne des Équipes
-
-### 2.1. Les Commandements du Hackathon : À faire et à ne pas faire
+### 2.2. Les Commandements du Hackathon : À faire et à ne pas faire
 
 Pour que 11 équipes convergent vers un produit unique et fonctionnel, le respect de quelques principes fondamentaux est non-négociable.
 
@@ -134,6 +134,7 @@ Pour que 11 équipes convergent vers un produit unique et fonctionnel, le respec
     *   **À FAIRE :** Chaque équipe est responsable de fournir un `Dockerfile` fonctionnel pour son service. Testez régulièrement que votre service démarre correctement avec `docker-compose up`.
     *   **À NE PAS FAIRE :** Développer pendant 4 jours en local avec votre IDE et vous dire "on verra pour Docker plus tard".
     *   **POURQUOI ?** La démo finale se fera avec `docker-compose up`. Si votre service ne fonctionne que sur votre machine, il ne fonctionne pas pour le projet. Docker est la garantie de la reproductibilité et le filet de sécurité de notre démo.
+
 
 
 ## 3. Organisation Interne des Équipes
