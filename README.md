@@ -17,8 +17,45 @@ Nous allons construire une application distribuée basée sur une architecture m
 *   **Frontend :** Framework JavaScript moderne (React, Vue, ou Angular)
 *   **Conteneurisation :** Docker & Docker Compose
 
-![Diagramme d'architecture](./docs/images/architecture-diagram.png)
-*(Note : Ce diagramme est une représentation conceptuelle de l'architecture cible)*
+```mermaid
+  graph TD
+      subgraph "Client"
+          User[<i class='fa fa-user'></i> Joueur] --> FE[Frontend<br/>(Équipes 6, 7, 8)];
+      end
+  
+      subgraph "Serveur"
+          FE -- Requêtes HTTP --> Gateway[API Gateway<br/>(Équipe 1)];
+  
+          subgraph "Services Applicatifs"
+              Gateway --> UserService[User Service<br/>(Équipe 11)];
+              Gateway --> LobbyService[Game Lobby Service<br/>(Équipe 10)];
+              Gateway --> GameEngine[Game Engine<br/>(Équipes 2, 3, 4)];
+          end
+  
+          subgraph "Communication Asynchrone"
+              GameEngine -- Publie 'GameStateUpdated' --> RabbitMQ[<i class='fa fa-envelope'></i> RabbitMQ<br/>Bus de Messages];
+              RabbitMQ --> NotificationService[Notification Service<br/>(Équipe 9)];
+              NotificationService -- Pousse via WebSocket --> FE;
+          end
+  
+          subgraph "Persistance"
+              GameEngine -- Lit/Écrit l'état --> GameStateService[Game State Service<br/>(Équipe 5)];
+              GameStateService --> Redis[(<i class='fa fa-database'></i> Redis)];
+              UserService --> DB[(<i class='fa fa-database'></i> PostgreSQL/H2)];
+              LobbyService --> DB;
+          end
+  
+          subgraph "Infrastructure"
+              style Infrastructure fill:#f9f9f9,stroke:#ddd
+              Gateway -- Découvre via --> Eureka[<i class='fa fa-sitemap'></i> Eureka<br/>Service Discovery];
+              UserService -- S'enregistre --> Eureka;
+              LobbyService -- S'enregistre --> Eureka;
+              GameEngine -- S'enregistre --> Eureka;
+              GameStateService -- S'enregistre --> Eureka;
+              NotificationService -- S'enregistre --> Eureka;
+          end
+      end
+```
 
 ### 1.1. Le Rôle Indispensable de Docker
 
