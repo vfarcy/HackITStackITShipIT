@@ -17,45 +17,61 @@ Nous allons construire une application distribuée basée sur une architecture m
 *   **Frontend :** Framework JavaScript moderne (React, Vue, ou Angular)
 *   **Conteneurisation :** Docker & Docker Compose
 
-```mermaid
-  graph TD
-      subgraph "Client"
-          User[<i class='fa fa-user'></i> Joueur] --> FE[Frontend<br/>(Équipes 6, 7, 8)];
-      end
-  
-      subgraph "Serveur"
-          FE -- Requêtes HTTP --> Gateway[API Gateway<br/>(Équipe 1)];
-  
-          subgraph "Services Applicatifs"
-              Gateway --> UserService[User Service<br/>(Équipe 11)];
-              Gateway --> LobbyService[Game Lobby Service<br/>(Équipe 10)];
-              Gateway --> GameEngine[Game Engine<br/>(Équipes 2, 3, 4)];
-          end
-  
-          subgraph "Communication Asynchrone"
-              GameEngine -- Publie 'GameStateUpdated' --> RabbitMQ[<i class='fa fa-envelope'></i> RabbitMQ<br/>Bus de Messages];
-              RabbitMQ --> NotificationService[Notification Service<br/>(Équipe 9)];
-              NotificationService -- Pousse via WebSocket --> FE;
-          end
-  
-          subgraph "Persistance"
-              GameEngine -- Lit/Écrit l'état --> GameStateService[Game State Service<br/>(Équipe 5)];
-              GameStateService --> Redis[(<i class='fa fa-database'></i> Redis)];
-              UserService --> DB[(<i class='fa fa-database'></i> PostgreSQL/H2)];
-              LobbyService --> DB;
-          end
-  
-          subgraph "Infrastructure"
-              style Infrastructure fill:#f9f9f9,stroke:#ddd
-              Gateway -- Découvre via --> Eureka[<i class='fa fa-sitemap'></i> Eureka<br/>Service Discovery];
-              UserService -- S'enregistre --> Eureka;
-              LobbyService -- S'enregistre --> Eureka;
-              GameEngine -- S'enregistre --> Eureka;
-              GameStateService -- S'enregistre --> Eureka;
-              NotificationService -- S'enregistre --> Eureka;
-          end
-      end
+### 1.2. Schéma d'Architecture Détaillé
+
+Le schéma ci-dessous illustre le flux de communication entre les différents composants de notre application, du navigateur de l'utilisateur jusqu'aux services de backend et aux systèmes de stockage.
+
 ```
+
+  +--------------------------------------------------------------------------------------------------+
+  |                                        Navigateur de l'Utilisateur                               |
+  |                                                                                                  |
+  |    +------------------------------------------------------------------------------------------+  |
+  |    |                                     Frontend (React/Vue/Angular)                         |  |
+  |    |                                                                                          |  |
+  |    |  (Équipe 6: Plateau)   (Équipe 7: Ferme Joueur)   (Équipe 8: Inventaire)                  |  |
+  |    +------------------------------------------------------------------------------------------+  |
+  |         |             ^                                                                          |
+  |         | HTTP/REST   | WebSocket                                                                |
+  +---------|-------------|--------------------------------------------------------------------------+
+           |             |
+           |             |
+  +--------v-------------|--------------------------------------------------------------------------+
+  |                       |                                        Docker Network                  |
+  |  +--------------------+---------------------------------+                                        |
+  |  | API Gateway (Spring Cloud Gateway) - Équipe 1        |                                        |
+  |  | (Point d'entrée unique, routage, sécurité de base)   |                                        |
+  |  +------------------------------------------------------+                                        |
+  |      |         |         |         |         |                                                   |
+  |      | REST    | REST    | REST    | REST    | REST                                              |
+  |      v         v         v         v         v                                                   |
+  |  +---------+ +---------+ +---------+ +---------+ +----------------------+                        |
+  |  | User    | | Game    | | Game    | | Game    | | Notification Service |<-----(Écoute)-----------+
+  |  | Service | | Lobby   | | Engine  | | State   | | (Équipe 9)           |                        |
+  |  | (Éq. 11)| | Service | | (Éq. 2-4) | Service | +----------------------+                        |
+  |  +---------+ | (Éq. 10)| +---------+ | (Éq. 5) |      ^ WebSocket (STOMP)                        |
+  |      |       |         |      |      +---------+      | (Pousse les mises à jour)                |
+  |      |       |         |      |           |            +----------------------------------------+
+  |      |       |         |      |           |
+  |      |       |         |      |           |
+  |      v       v         |      v           v
+  |  +---------+ +---------+ |  +--------------------------+  +--------------------+
+  |  | H2 /    | | H2 /    | |  | RabbitMQ (Messagerie)    |  | Redis (Cache)      |
+  |  | Postgre | | Postgre | |  | (Événements de jeu)      |  | (État du jeu)      |
+  |  | SQL     | | SQL     | +->| `GameStateUpdatedEvent`  |->| (GameState Object) |
+  |  +---------+ +---------+    +--------------------------+  +--------------------+
+  |                                      ^                            ^
+  |                                      | (Publie l'événement)       | (Sauvegarde/Lecture)
+  |                                      +----------------------------+
+  |                                                                                                  |
+  |  +--------------------------------------------------------------------------------------------+  |
+  |  | Service Discovery (Eureka) - Équipe 1                                                      |  |
+  |  | (Tous les services backend s'enregistrent ici. La Gateway l'utilise pour le routage.)      |  |
+  |  +--------------------------------------------------------------------------------------------+  |
+  +--------------------------------------------------------------------------------------------------+
+
+```
+
 
 ### 1.1. Le Rôle Indispensable de Docker
 
