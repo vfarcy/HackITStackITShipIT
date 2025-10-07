@@ -19,7 +19,7 @@ Nous allons construire une application distribuée basée sur une architecture m
 
 ### 1.1. Architecture Frontend (Single Page Application)
 
-L'interface utilisateur sera une **Application Web Monopage (Single Page Application - SPA)**. Ce choix architectural est crucial pour offrir une expérience de jeu fluide et réactive, digne d'une application de bureau. Au lieu de recharger des pages entières, la SPA mettra à jour dynamiquement les composants de l'interface (le plateau, l'inventaire, la ferme du joueur) en temps réel. Elle communiquera avec le backend via deux canaux distincts : des appels **API REST** pour envoyer les actions du joueur (ex: "placer un fermier") et une connexion **WebSocket** pour recevoir instantanément les mises à jour de l'état du jeu, garantissant que tous les joueurs voient la même information au même moment.
+L'interface utilisateur sera une **Application Web Monopage (Single Page Application - SPA)**. Ce choix architectural offre une expérience de jeu fluide et réactive. La SPA mettra à jour dynamiquement les composants de l'interface (le plateau, l'inventaire, la ferme du joueur). Elle communiquera avec le backend via deux canaux distincts : des appels **API REST** pour envoyer les actions du joueur (ex: "placer un fermier") et une connexion **WebSocket** pour recevoir instantanément les mises à jour de l'état du jeu, garantissant que tous les joueurs voient la même information au même moment.
 
 ### 1.2. Schéma d'Architecture Détaillé
 
@@ -85,15 +85,15 @@ Dans un projet de cette envergure, avec 11 microservices développés par 74 per
 
 *   **Gestion Simplifiée des Dépendances :** Notre architecture repose sur des services tiers comme RabbitMQ et Redis. Les installer et les configurer manuellement sur chaque poste serait une source infinie d'erreurs et de perte de temps. Avec `docker-compose`, l'ajout de ces services se résume à quelques lignes de YAML. Tout le monde dispose des mêmes versions, configurées de la même manière, en lançant une seule commande.
 
-*   **Isolation et Autonomie des Services :** Chaque microservice tourne dans son propre conteneur isolé. Cela garantit que les dépendances d'un service (par exemple, une librairie spécifique) n'entrent pas en conflit avec celles d'un autre. C'est l'incarnation même du principe d'autonomie des microservices.
+*   **Isolation et Autonomie des Services :** Chaque microservice tourne dans son propre conteneur isolé. Cela garantit que les dépendances d'un service (par exemple, une librairie spécifique) n'entrent pas en conflit avec celles d'un autre. C'est le principe même d'autonomie des microservices.
 
-*   **Fiabilité de l'Intégration et de la Démo Finale :** Le fichier `docker-compose.yml` est notre "contrat d'orchestration". Il définit comment les 11 services, le frontend, RabbitMQ et Redis démarrent et communiquent entre eux. Pour la démo finale, lancer l'application entière se fera via une seule commande : `docker-compose up`. C'est la garantie d'une présentation fiable, reproductible et professionnelle, prouvant que nous avons livré un système intégré et non un assemblage fragile.
+*   **Fiabilité de l'Intégration et de la Démo Finale :** Le fichier `docker-compose.yml` est notre "contrat d'orchestration". Il définit comment les 11 services, le frontend, RabbitMQ et Redis démarrent et communiquent entre eux. Pour la démo finale, lancer l'application se fera via une seule commande : `docker-compose up`. C'est la garantie d'une présentation fiable, reproductible et professionnelle, prouvant que nous avons livré un système intégré et non un assemblage fragile.
 
-En résumé, Docker abstrait la complexité de l'infrastructure, permettant à toutes les équipes de collaborer efficacement pour construire un produit unifié, comme le feraient des équipes dans une entreprise technologique moderne.
+En résumé, Docker abstrait la complexité de l'infrastructure, permettant à toutes les équipes de collaborer efficacement pour construire un produit unifié.
 
-### 1.4. docke-compose.yml
+### 1.4. docker-compose.yml
 
-La création d'un squelette pour le fichier `docker-compose.yml` est même l'une des toutes premières tâches du hackathon.
+La création d'un squelette pour le fichier `docker-compose.yml` est l'une des toutes premières tâches du hackathon.
 
 C'est de la responsabilité de l'Équipe 1 (Les Architectes) de le définir dès le Jour 1. Ce fichier de base est essentiel pour que toutes les autres équipes puissent démarrer leur développement dans un environnement cohérent.
 
@@ -203,7 +203,7 @@ Le projet est divisé en 11 domaines, chacun sous la responsabilité d'une équi
 
 ### 2.2. Les Commandements du Hackathon : À faire et à ne pas faire
 
-Pour que 11 équipes convergent vers un produit unique et fonctionnel, le respect de quelques principes fondamentaux est non-négociable.
+Pour que 11 équipes convergent vers un produit unique et fonctionnel, le respect de quelques principes fondamentaux.
 
 *   **1. VALIDEZ LES CONTRATS AVANT DE CODER**
     *   **À FAIRE :** Passez du temps avec les équipes dont vous dépendez (ou qui dépendent de vous) pour définir et valider les contrats d'API (OpenAPI) et les formats d'événements (RabbitMQ). Utilisez le canal `#api-contracts`.
@@ -242,6 +242,38 @@ Pour assurer une collaboration fluide entre 74 personnes, nous suivrons des ritu
 *   **Scrum des Scrums :** Chaque matin à 9h15, un représentant technique de chaque équipe se réunit avec les organisateurs pour synchroniser, identifier les dépendances et lever les blocages.
 *   **Contrats d'API :** La communication entre les services se base sur des contrats formels définis avec **OpenAPI (Swagger)**. L'équipe "Architectes" est la gardienne de la documentation d'API centrale. Aucune intégration ne doit commencer sans un contrat validé.
 *   **Outils :** La communication se fera sur une plateforme de chat (Slack/Teams) avec des canaux dédiés (`#api-contracts`, `#frontend-backend-sync`, `#deployment-docker`, etc.).
+
+### 2.5. Git, collaboration et visibilité
+
+Bien que l'architecture soit composée de microservices (autonomes à l'exécution), la gestion du code source dans un monorepo réduit la complexité de coordination et permet aux équipes de se concentrer sur l'essentiel : coder et intégrer.
+
+Toutes les équipes ont une visibilité complète sur le code des autres. Une équipe frontend peut facilement inspecter le code d'un endpoint backend pour comprendre son fonctionnement, ce qui réduit les frictions et les suppositions.
+
+La structure du dépôt sera la suivante :
+
+
+``` yaml 
+/agricola-numerica-hackathon/
+├── .git/
+├── .gitignore
+├── README.md
+├── docker-compose.yml
+│
+├── api-gateway/
+│   ├── src/
+│   ├── pom.xml
+│   └── Dockerfile
+│
+├── user-service/
+│   ├── src/
+│   ├── pom.xml
+│   └── Dockerfile
+│
+├── game-engine/
+│   ├── ...
+│
+└── ... (et ainsi de suite pour chaque service)
+```
 
 ## 3. Backlog Quotidien (Objectifs Généraux)
  
