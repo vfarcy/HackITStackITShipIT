@@ -1,41 +1,45 @@
 # Grilles d'Évaluation - Hackathon "Agricola Numerica"
 
-Ce document détaille les grilles critériées utilisées pour l'évaluation finale du hackathon. La note finale est une pondération de trois composantes principales, comme décrit dans le `README.md`.
+Ce document détaille les grilles critériées utilisées pour l'évaluation du hackathon.
 
-## 1. Démo Finale (40% de la note globale)
-
-L'évaluation de la démo porte sur la présentation globale et unifiée de l'application. C'est une **responsabilité collective**.
-
-| Critère | Description | Points (/10) | Commentaires |
-| :--- | :--- | :--- | :--- |
-| **Fluidité du Scénario** | La démonstration raconte une histoire de jeu cohérente et fluide, de la création de la partie à la fin de quelques tours, sans accroc majeur. | | |
-| **Robustesse de l'Application** | L'application fonctionne sans bugs bloquants ou erreurs visibles pendant le scénario de démo. Le lancement via `docker-compose up` est fonctionnel. | | |
-| **Complétude des Fonctionnalités** | Les fonctionnalités clés du backlog (création partie, action simple, mise à jour temps réel, récolte) sont implémentées et démontrées. | | |
-| **Clarté des Explications** | L'équipe explique clairement le flux technique (API Gateway -> Service -> RabbitMQ -> WebSocket -> Frontend) et les choix d'architecture. | | |
-| **Total** | | **/ 40** | |
+**Échelle de notation commune :**
+Chaque critère est évalué sur une échelle de 1 à 4.
+- **1 : En dessous des attentes** (Les objectifs de base ne sont pas atteints)
+- **2 : Conforme aux attentes** (Les objectifs sont atteints de manière fonctionnelle)
+- **3 : Au-dessus des attentes** (Les objectifs sont dépassés, avec des initiatives ou une qualité notable)
+- **4 : Exceptionnel** (Prestation exemplaire qui peut servir de modèle, impact majeur)
 
 ---
 
-## 2. Évaluation par les Pairs (30% de la note globale)
+## 1. Auto-évaluation & Évaluation par les Pairs
 
-Chaque membre évalue anonymement les autres membres de sa propre équipe. Cette grille est à remplir pour chaque coéquipier.
+*Cette grille est à remplir par chaque membre pour s'auto-évaluer et pour évaluer chaque membre de son équipe.*
 
-| Critère | Description | Note (/10) | Justification (Exemples concrets) |
+| Critère | Description | Note (1-4) | Justification (Exemples concrets) |
 | :--- | :--- | :--- | :--- |
 | **Contribution Technique** | Qualité et quantité du code produit, pertinence des solutions techniques proposées, aide apportée sur les aspects techniques. | | |
-| **Collaboration & Communication** | Participe activement aux discussions, communique clairement ses avancées et ses blocages, est à l'écoute des autres. | | |
-| **Fiabilité & Engagement** | Respecte les engagements pris, est présent et impliqué dans les rituels de l'équipe, fait preuve d'autonomie. | | |
-| **Total** | | **/ 30** | |
+| **Collaboration & Communication** | Participe activement aux discussions, communique clairement ses avancées et ses blocages, est à l'écoute et respectueux des autres. | | |
+| **Fiabilité & Engagement** | Respecte les engagements pris, est présent et impliqué dans les rituels de l'équipe, fait preuve d'autonomie et de proactivité. | | |
 
 ---
 
-## 3. Évaluation par les Mentors (30% de la note globale)
+## 2. Évaluation Finale par le Jury
 
-L'équipe d'encadrement évalue la performance individuelle de chaque participant tout au long de la semaine.
+*Cette grille est utilisée par le jury pour évaluer la performance collective de l'équipe lors de la présentation finale.*
 
-| Critère | Description | Note (/10) | Observations des mentors |
+### 2.1 Qualité de la Démonstration
+
+| Critère | Description | Note (1-4) | Commentaires du Jury |
 | :--- | :--- | :--- | :--- |
-| **Apprentissage & Montée en compétence** | Capacité à intégrer rapidement de nouveaux concepts (Docker, RabbitMQ, etc.) et à les appliquer dans le projet. | | |
-| **Curiosité & Proactivité** | Pose des questions pertinentes, cherche des solutions par soi-même, ne reste pas bloqué, propose des améliorations. | | |
-| **Esprit d'équipe & Entraide** | Collabore au-delà de sa propre équipe, aide les autres, partage ses découvertes, contribue à la bonne ambiance générale. | | |
-| **Total** | | **/ 30** | |
+| **Fluidité du Scénario** | La démonstration raconte une histoire de jeu cohérente et fluide, de la création de la partie à la fin de quelques tours, sans accroc majeur. | | |
+| **Robustesse de l'Application** | L'application fonctionne sans bugs bloquants ou erreurs visibles. Le lancement via `docker-compose up` est fonctionnel et rapide. | | |
+| **Complétude & Complexité** | Les fonctionnalités clés (création partie, action, temps réel, récolte) sont implémentées et fonctionnelles. La complexité gérée est évaluée. | | |
+| **Clarté des Explications** | L'équipe explique clairement le flux technique (API Gateway -> Service -> RabbitMQ -> WebSocket -> Frontend) et justifie ses choix d'architecture. | | |
+
+### 2.2 Qualité de la Rétrospective
+
+| Critère | Description | Note (1-4) | Commentaires du Jury |
+| :--- | :--- | :--- | :--- |
+| **Honnêteté & Pertinence** | L'équipe présente une analyse lucide et honnête des succès, des échecs et des difficultés rencontrées, sans chercher d'excuses. | | |
+| **Apprentissages Clés** | L'équipe articule clairement les leçons apprises, tant sur le plan technique (ex: "l'importance des contrats d'API") que sur le plan humain (ex: "comment mieux communiquer"). | | |
+| **Qualité de la Présentation** | La rétrospective est bien structurée, concise et engageante. Tous les membres de l'équipe semblent impliqués et partagent une vision commune. | | |
